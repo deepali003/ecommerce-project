@@ -3,8 +3,17 @@ const AppError = require("../utils/AppError");
 
 const getAllProducts = async (req, res, next) => {
   try {
+    let limit = null;
+
+    if (req.query.limit !== undefined) {
+      limit = Number(req.query.limit);
+
+      if (!Number.isInteger(limit) || limit <= 0) {
+        return next(new AppError("Limit must be a positive integer", 400));
+      }
+    }
     // throw new Error("Testing server error");
-    const products = await productService.getAllProducts();
+    const products = await productService.getAllProducts(limit);
     res.json({
       success: true,
       products: products,

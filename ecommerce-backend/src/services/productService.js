@@ -1,7 +1,14 @@
 const pool = require("../config/database");
 
-const getAllProducts = async () => {
-  const result = await pool.query("SELECT * FROM products");
+const getAllProducts = async (limit = null) => {
+  let query = 'SELECT * FROM products ORDER BY id DESC';
+  const values = [];
+
+  if (limit !== null) {
+    query += " LIMIT $1";
+    values.push(limit);
+  }
+  const result = await pool.query(query, values);
   return result.rows;
 };
 
@@ -41,16 +48,16 @@ const deleteProduct = async (id) => {
     `DELETE FROM products
     WHERE id = $1
     RETURNING *`,
-    [id]
+    [id],
   );
 
   return result.rows[0];
-}
+};
 
 module.exports = {
   getAllProducts,
   createProducts,
   getProductById,
   updateProduct,
-  deleteProduct
+  deleteProduct,
 };

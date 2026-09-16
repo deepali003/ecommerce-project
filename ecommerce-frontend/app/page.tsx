@@ -1,14 +1,13 @@
-import Header from "./components/Header";
-import ProductCard from "./components/ProductCard";
-import { getProducts } from "./lib/api";
+import Header from "@/components/Header";
+import ProductCard from "@/components/ProductCard";
+import { getProducts } from "../lib/api";
+import Link from "next/link";
 
 export default async function Home() {
-  const products = await getProducts();
+  const products = await getProducts(8);
 
   return (
     <main>
-      {/* Header */}
-      <Header />
 
       {/* Hero Section */}
       <section className="bg-gray-100">
@@ -83,9 +82,9 @@ export default async function Home() {
               </p>
             </div>
 
-            <button className="font-semibold text-gray-900 hover:underline">
+            <Link href="/products" className="font-semibold text-gray-900 hover:underline">
               View All
-            </button>
+            </Link>
           </div>
 
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
