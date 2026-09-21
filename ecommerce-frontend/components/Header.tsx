@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import CartCount from "./CartCount";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -36,8 +37,8 @@ export default function Header() {
           {/* Desktop Actions */}
           <div className="hidden items-center gap-5 md:flex">
             <button className="text-gray-700 hover:text-black">Search</button>
-
-            <button className="text-gray-700 hover:text-black">Cart (0)</button>
+            <CartCount />
+            {/* <button className="text-gray-700 hover:text-black">Cart (0)</button> */}
           </div>
 
           {/* Mobile Hamburger Button */}

@@ -2,17 +2,16 @@ import type { Product } from "@/lib/types";
 import Image from "next/image";
 import Link from "next/link";
 import { BACKEND_URL } from "@/lib/api";
+import AddToCartButton from "./AddToCartButton";
 
 type ProductCardProps = {
   product: Product;
 };
 
 export default function ProductCard({ product }: ProductCardProps) {
-   console.log("Product:", product);
-  console.log("Product image:", product.image);
-  console.log("Final image URL:", `${BACKEND_URL}${product.image}`);
   return (
     <div className="overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+      
       {/* Product Image */}
       <Link href={`/products/${product.id}`}>
         <div className="relative h-52 w-full bg-gray-100">
@@ -43,15 +42,12 @@ export default function ProductCard({ product }: ProductCardProps) {
             ₹{product.price}
           </span>
 
-          <span className="text-sm text-gray-500">Stock: {product.stock}</span>
+          <span className="text-sm text-gray-500">
+            Stock: {product.stock}
+          </span>
         </div>
 
-        <button
-          type="button"
-          className="w-full rounded-md bg-black px-4 py-2 text-sm font-medium text-white transition hover:bg-gray-800"
-        >
-          Add to Cart
-        </button>
+        <AddToCartButton product={product} />
       </div>
     </div>
   );
